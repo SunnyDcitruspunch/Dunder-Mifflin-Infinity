@@ -1,6 +1,6 @@
 <template>
-  <div class="window z-20"
-    :style="{ height: height + '%', width: width + '%', top: yPos + 'px', left: xPos + 'px', position: 'absolute', cursor: dragging ? 'move' : 'auto' }"
+  <div class="window z-20 flex flex-col"
+    :style="{ top: yPos + 'px', left: xPos + 'px', position: 'absolute', cursor: dragging ? 'move' : 'auto' }"
        @mousedown="startDrag"
        @mouseup="stopDrag"
        @mouseleave="stopDrag">
@@ -45,8 +45,30 @@ export default {
     },
     drag(event) {
       if (this.dragging) {
-        this.xPos = event.clientX - this.dragOffsetX;
-        this.yPos = event.clientY - this.dragOffsetY;
+        const newXPos = event.clientX - this.dragOffsetX;
+        const newYPos = event.clientY - this.dragOffsetY;
+
+        const windowWidth = window.innerWidth;
+        const windowHeight = window.innerHeight;
+
+        const elementWidth = this.width;
+        const elementHeight = this.height;
+
+        if (newXPos >= 0 && (newXPos + elementWidth) <= windowWidth) {
+          this.xPos = newXPos;
+        } else if (newXPos < 0) {
+          this.xPos = 0;
+        } else if ((newXPos + elementWidth) > windowWidth) {
+          this.xPos = windowWidth - elementWidth;
+        }
+
+        if (newYPos >= 0 && (newYPos + elementHeight) <= windowHeight) {
+          this.yPos = newYPos;
+        } else if (newYPos < 0) {
+          this.yPos = 0;
+        } else if ((newYPos + elementHeight) > windowHeight) {
+          this.yPos = windowHeight - elementHeight;
+        }
       }
     },
     stopDrag() {
@@ -59,3 +81,10 @@ export default {
   }
 }
 </script>
+
+<style>
+  .title-bar-controls button {
+    min-height: 15px;
+    min-width: 15px
+  }
+</style>

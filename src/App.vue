@@ -45,5 +45,9 @@ export default {
   background-color: #000FFF;
   color: white;
   overflow: hidden;
+  position: relative;
+}
+body {
+  overflow: hidden;
 }
 </style>
