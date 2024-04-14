@@ -6,7 +6,7 @@
       <img alt="jackhammer" class="w-1/2" :src="jackhammer" />
       <p class="font-bold text-xl">
         <span class="text-black">Coming </span>
-        <span v-for="(char, index) in message" :key="index" :class="getColor(index)">
+        <span v-for="(char, index) in message" :key="index" :style="getColor(index)">
         {{ char }}
         </span>
       </p>
@@ -34,7 +34,7 @@ export default {
   },
   methods: {
     getColor(index) {
-      return index % 2 === 0 ? 'text-cyan-700' : 'text-rose-600';
+      return `color: ${index % 2 === 0 ? '#6ec256' : '#f22b25'};`
     },
     updateDimensions(dimensions) {
       this.windowHeight = dimensions.height;

@@ -15,6 +15,10 @@ export default {
   props: {
     img: String,
     initialTop: Number,
+    initialLeft: {
+      type: Number,
+      default: 0
+    },
     name: String,
   },
   data() {
@@ -22,7 +26,7 @@ export default {
       dragging: false,
       dragOffsetX: 0,
       dragOffsetY: 0,
-      leftPosition: 0,
+      leftPosition: this.initialLeft,
       topPosition: this.initialTop,
       rafId: null
     };

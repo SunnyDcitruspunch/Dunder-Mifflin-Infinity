@@ -8,6 +8,7 @@
         v-for="shortcut in shortcuts"
         :key="shortcut.name"
         :img="shortcut.img"
+        :initialLeft="shortcut.initialLeft"
         :initialTop="shortcut.initialTop"
         :name="shortcut.name"
     />
@@ -21,6 +22,7 @@ import ShortCut from './common/ShortCut/ShortCut.vue';
 import computer from '@/assets/computer.png';
 import folder from '@/assets/folder.png';
 import wallpaper from '@/assets/dunder-mifflin-bg.png';
+import recycle from '@/assets/recycle.png';
 import UnderConstruction from './components/UnderConstruction/UnderConstruction.vue';
 import Mobile from './components/Mobile.vue';
 import './common/reset.css'
@@ -41,14 +43,17 @@ export default {
     }
   },
   data() {
+    const shortcutSize = 100
+
     return {
       computer,
       folder,
       shortcuts: [
         { img: computer, initialTop: 0, name: 'Computer' },
-        { img: folder, initialTop: 100, name: 'Meeting Notes' },
-        { img: folder, initialTop: 200, name: 'Archives' },
-        { img: folder, initialTop: 300, name: 'Cover Sheets' }
+        { img: folder, initialTop: shortcutSize, name: 'Meeting Notes' },
+        { img: folder, initialTop: shortcutSize*2, name: 'Archives' },
+        { img: folder, initialTop: shortcutSize*3, name: 'Cover Sheets' },
+        { img: recycle, initialLeft: window.innerWidth - shortcutSize, initialTop: window.innerHeight - shortcutSize, name: 'Recycle' }
       ],
       wallpaper
     }
