@@ -23,6 +23,7 @@ export default {
       dragOffsetY: 0,
       leftPosition: 100,
       topPosition: 100,
+      rafId: null
     };
   },
   methods: {
@@ -35,16 +36,24 @@ export default {
       event.preventDefault(); 
     },
     drag(event) {
-      if (this.dragging) {
+      event.preventDefault()
+      if (this.rafId) {
+        cancelAnimationFrame(this.rafId);
+      }
+      this.rafId = requestAnimationFrame(() => {
         this.leftPosition = event.clientX - this.dragOffsetX;
         this.topPosition = event.clientY - this.dragOffsetY;
-      }
+      });
     },
     stopDrag() {
       if (this.dragging) {
         this.dragging = false;
         window.removeEventListener('mousemove', this.drag);
         window.removeEventListener('mouseup', this.stopDrag);
+        if (this.rafId) {
+          cancelAnimationFrame(this.rafId); 
+          this.rafId = null;
+        }
       }
     }
   }
