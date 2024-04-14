@@ -1,19 +1,17 @@
 <template>
-  <div :style="{ height: windowHeight + 'px', width: windowWidth + 'px' }">
-    <Window :height="windowHeight" :width="windowWidth" title="Infinity Interoffice QuickLaunch" @update-dimensions="updateDimensions">
-      <div class="bg-white z-20 flex flex-col items-center m-1 mt-0">
-        <p class="text-black text-3xl font-bold">Under Construction</p>
-        <img alt="dunder-mifflin-paper-company" class="m-4" :src="logo" />
-        <img alt="jackhammer" class="w-1/2" :src="jackhammer" />
-        <p class="font-bold text-xl">
-          <span class="text-black">Coming </span>
-          <span v-for="(char, index) in message" :key="index" :class="getColor(index)">
-          {{ char }}
-          </span>
-        </p>
-      </div>
-    </Window>
-  </div>
+  <Window :height="windowHeight" :width="windowWidth" title="Infinity Interoffice QuickLaunch" @update-dimensions="updateDimensions">
+    <div class="bg-white z-20 flex flex-col items-center m-1 mt-0">
+      <p class="text-black text-3xl font-bold">Under Construction</p>
+      <img alt="dunder-mifflin-paper-company" class="m-4 non-selectable" draggable="false" :src="logo" />
+      <img alt="jackhammer" class="w-1/2" :src="jackhammer" />
+      <p class="font-bold text-xl">
+        <span class="text-black">Coming </span>
+        <span v-for="(char, index) in message" :key="index" :class="getColor(index)">
+        {{ char }}
+        </span>
+      </p>
+    </div>
+  </Window>
 </template>
 
 <script>

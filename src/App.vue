@@ -1,5 +1,5 @@
 <template>
-  <img alt="dunder-mifflin-logo-bg" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 align-middle leading-[100px]" :src="wallpaper" style="height: 80vh" />
+  <img alt="dunder-mifflin-logo-bg" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 align-middle leading-[100px] non-selectable" draggable="false" :src="wallpaper" style="height: 80vh" />
   <ShortCut :img="computer" name="Computer" />
   <ShortCut :img="folder" name="Meeting Notes" />
   <ShortCut :img="folder" name="Archives" />
@@ -49,5 +49,11 @@ export default {
 }
 body {
   overflow: hidden;
+}
+.non-selectable {
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
 }
 </style>
