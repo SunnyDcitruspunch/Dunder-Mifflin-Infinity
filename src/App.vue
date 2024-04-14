@@ -1,26 +1,29 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <OfficeQuickSearch />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import OfficeQuickSearch from './components/OfficeQuickSearch/OfficeQuickSearch.vue';
+import './common/reset.css'
+import './index.css'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    OfficeQuickSearch
   }
 }
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  height: 100dvh;
+  width: 100vw;
+  background-color: #000FFF;
+  color: white;
 }
 </style>
