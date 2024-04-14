@@ -14,6 +14,7 @@ export default {
   name: 'ShortCut',
   props: {
     img: String,
+    initialTop: Number,
     name: String,
   },
   data() {
@@ -21,8 +22,8 @@ export default {
       dragging: false,
       dragOffsetX: 0,
       dragOffsetY: 0,
-      leftPosition: 100,
-      topPosition: 100,
+      leftPosition: 0,
+      topPosition: this.initialTop,
       rafId: null
     };
   },

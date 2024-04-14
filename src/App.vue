@@ -1,9 +1,12 @@
 <template>
   <img alt="dunder-mifflin-logo-bg" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 align-middle leading-[100px] non-selectable" draggable="false" :src="wallpaper" style="height: 80vh" />
-  <ShortCut :img="computer" name="Computer" />
-  <ShortCut :img="folder" name="Meeting Notes" />
-  <ShortCut :img="folder" name="Archives" />
-  <ShortCut :img="folder" name="Cover Sheets" />
+  <ShortCut
+      v-for="shortcut in shortcuts"
+      :key="shortcut.name"
+      :img="shortcut.img"
+      :initialTop="shortcut.initialTop"
+      :name="shortcut.name"
+  />
   <UnderConstruction />
 </template>
 
@@ -28,6 +31,12 @@ export default {
     return {
       computer,
       folder,
+      shortcuts: [
+        { img: computer, initialTop: 0, name: 'Computer' },
+        { img: folder, initialTop: 100, name: 'Meeting Notes' },
+        { img: folder, initialTop: 200, name: 'Archives' },
+        { img: folder, initialTop: 300, name: 'Cover Sheets' }
+      ],
       wallpaper
     }
   }
