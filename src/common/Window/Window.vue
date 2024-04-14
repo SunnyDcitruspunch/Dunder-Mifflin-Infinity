@@ -1,5 +1,5 @@
 <template>
-  <div class="window overflow-hidden"
+  <div class="window z-20"
     :style="{ height: height + '%', width: width + '%', top: yPos + 'px', left: xPos + 'px', position: 'absolute', cursor: dragging ? 'move' : 'auto' }"
        @mousedown="startDrag"
        @mouseup="stopDrag"
