@@ -1,8 +1,8 @@
 <template>
   <Window :height="windowHeight" :width="windowWidth" title="Infinity Interoffice QuickLaunch" @update-dimensions="updateDimensions">
-    <div class="bg-white z-20 flex flex-col items-center m-1 mt-0">
-      <p class="text-black text-3xl font-bold">Under Construction</p>
-      <img alt="dunder-mifflin-paper-company" class="m-4 non-selectable" draggable="false" :src="logo" />
+    <div class="bg-white z-20 flex flex-col items-center m-1 mt-0 custom-font p-5">
+      <p class="text-black text-2xl font-bold mt-5">Under Construction</p>
+      <img alt="dunder-mifflin-paper-company" class="m-4 non-selectable" draggable="false" style="width: 150px" :src="logo" />
       <img alt="jackhammer" class="w-1/2" :src="jackhammer" />
       <p class="font-bold text-xl">
         <span class="text-black">Coming </span>
@@ -44,3 +44,9 @@ export default {
   name: 'UnderConstruction'
 }
 </script>
+
+<style scoped>
+.custom-font {
+  font-family: 'Standard CT Bold Condensed', sans-serif;
+}
+</style>
