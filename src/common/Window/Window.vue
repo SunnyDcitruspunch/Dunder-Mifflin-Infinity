@@ -1,6 +1,6 @@
 <template>
   <div class="window z-20 flex flex-col"
-    :style="{ top: yPos + 'px', left: xPos + 'px', position: 'absolute', cursor: dragging ? 'move' : 'auto' }"
+    :style="{ top: topPosition + 'px', left: leftPosition + 'px', position: 'absolute', cursor: dragging ? 'move' : 'auto' }"
        @mousedown="startDrag"
        @mouseup="stopDrag"
        @mouseleave="stopDrag">
@@ -28,18 +28,18 @@ export default {
   },
   data() {
     return {
-      xPos: 0,
-      yPos: 0,
       dragging: false,
       dragOffsetX: 0,
-      dragOffsetY: 0
+      dragOffsetY: 0,
+      leftPosition: 100,
+      topPosition: 300,
     };
   },
   methods: {
     startDrag(event) {
       this.dragging = true;
-      this.dragOffsetX = event.clientX - this.xPos;
-      this.dragOffsetY = event.clientY - this.yPos;
+      this.dragOffsetX = event.clientX - this.leftPosition;
+      this.dragOffsetY = event.clientY - this.topPosition;
       window.addEventListener('mousemove', this.drag);
       window.addEventListener('mouseup', this.stopDrag);
     },
@@ -55,19 +55,19 @@ export default {
         const elementHeight = this.height;
 
         if (newXPos >= 0 && (newXPos + elementWidth) <= windowWidth) {
-          this.xPos = newXPos;
+          this.leftPosition = newXPos;
         } else if (newXPos < 0) {
-          this.xPos = 0;
+          this.leftPosition = 0;
         } else if ((newXPos + elementWidth) > windowWidth) {
-          this.xPos = windowWidth - elementWidth;
+          this.leftPosition = windowWidth - elementWidth;
         }
 
         if (newYPos >= 0 && (newYPos + elementHeight) <= windowHeight) {
-          this.yPos = newYPos;
+          this.topPosition = newYPos;
         } else if (newYPos < 0) {
-          this.yPos = 0;
+          this.topPosition = 0;
         } else if ((newYPos + elementHeight) > windowHeight) {
-          this.yPos = windowHeight - elementHeight;
+          this.topPosition = windowHeight - elementHeight;
         }
       }
     },
