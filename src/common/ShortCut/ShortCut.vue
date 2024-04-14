@@ -5,7 +5,7 @@
        @mouseup="stopDrag"
        @mouseleave="stopDrag">
     <img alt="short-cut" class="w-14 z-10" :src="img" draggable="false" />
-    <p class="text-xs z-10">{{ name }}</p>
+    <p class="text-xs z-10 text-white">{{ name }}</p>
   </div>
 </template>
 
