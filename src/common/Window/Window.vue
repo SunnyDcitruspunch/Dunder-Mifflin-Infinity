@@ -2,8 +2,7 @@
   <div class="window z-20 flex flex-col"
     :style="{ top: topPosition + 'px', left: leftPosition + 'px', position: 'absolute', cursor: dragging ? 'move' : 'auto' }"
        @mousedown="startDrag"
-       @mouseup="stopDrag"
-       @mouseleave="stopDrag">
+       @mouseup="stopDrag">
     <div class="title-bar">
       <div class="title-bar-text">
         {{ title }}
