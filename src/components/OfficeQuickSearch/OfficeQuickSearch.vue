@@ -2,18 +2,35 @@
   <Window :height="50" id="quick-launch" :width="50" title="Infinity Interoffice QuickLaunch">
     <div class="grid grid-cols-2">
       <div class="quick-search-menu">
-        <p>Internet</p>
-        <p>Email</p>
-        <p>Instant Messenger</p>
-        <p>Warehouse</p>
+        <router-link to="/in-progress">
+          <p>Internet</p>
+        </router-link>
+        <router-link to="/in-progress">
+          <p>Email</p>
+        </router-link>
+        <router-link to="/in-progress">
+          <p>Instant Messenger</p>
+        </router-link>
+        <router-link to="/in-progress">
+          <p>Warehouse</p>
+        </router-link>
       </div>
       <div class="quick-search-menu">
-        <p>Sales</p>
-        <p>Accounting</p>
-        <p>Human Resources</p>
-        <p>Customer Service</p>
+        <router-link to="/in-progress">
+          <p>Sales</p>
+        </router-link>
+        <router-link to="/in-progress">
+          <p>Accounting</p>
+        </router-link>
+        <router-link to="/in-progress">
+          <p>Human Resources</p>
+        </router-link>
+        <router-link to="/in-progress">
+          <p>Customer Service</p>
+        </router-link>
       </div>
     </div>
+    <router-view></router-view>
   </Window>
 </template>
 

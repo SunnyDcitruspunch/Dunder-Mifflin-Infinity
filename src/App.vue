@@ -13,18 +13,16 @@
         :initialTop="shortcut.initialTop"
         :name="shortcut.name"
     />
-    <UnderConstruction />
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 import ShortCut from './common/ShortCut/ShortCut.vue';
-// import OfficeQuickSearch from './components/OfficeQuickSearch/OfficeQuickSearch.vue';
 import computer from '@/assets/computer.png';
 import folder from '@/assets/folder.png';
 import wallpaper from '@/assets/dunder-mifflin-bg.png';
 import recycle from '@/assets/recycle.png';
-import UnderConstruction from './components/UnderConstruction/UnderConstruction.vue';
 import Mobile from './components/Mobile.vue';
 import './common/reset.css'
 import './index.css'
@@ -32,9 +30,7 @@ import './index.css'
 export default {
   name: 'App',
   components: {
-    // OfficeQuickSearch,
     Mobile,
-    UnderConstruction,
     ShortCut
   },
   computed: {
