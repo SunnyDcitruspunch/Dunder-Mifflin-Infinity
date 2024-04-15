@@ -1,9 +1,10 @@
 <template>
   <div class="window z-20 flex flex-col"
-    :style="{ top: topPosition + 'px', left: leftPosition + 'px', position: 'absolute', cursor: dragging ? 'move' : 'auto' }"
+    :id="id"
+    :style="{ top: topPosition + 'px', left: leftPosition + 'px', position: 'absolute', cursor: 'default' }">
+    <div class="title-bar"
        @mousedown="startDrag"
        @mouseup="stopDrag">
-    <div class="title-bar">
       <div class="title-bar-text">
         {{ title }}
       </div>
@@ -22,6 +23,7 @@ export default {
   name: 'Window-Frame',
   props: {
     height: Number,
+    id: String,
     title: String,
     width: Number
   },
@@ -44,28 +46,29 @@ export default {
     },
     drag(event) {
       if (this.dragging) {
-        const newXPos = event.clientX - this.dragOffsetX;
-        const newYPos = event.clientY - this.dragOffsetY;
+        const xPosition = event.clientX - this.dragOffsetX;
+        const yPosition = event.clientY - this.dragOffsetY;
 
         const windowWidth = window.innerWidth;
         const windowHeight = window.innerHeight;
 
-        const elementWidth = this.width;
-        const elementHeight = this.height;
+        const frame = document.getElementById(this.id)
+        const elementWidth = frame.getBoundingClientRect().width;
+        const elementHeight = frame.getBoundingClientRect().height;
 
-        if (newXPos >= 0 && (newXPos + elementWidth) <= windowWidth) {
-          this.leftPosition = newXPos;
-        } else if (newXPos < 0) {
+        if (xPosition >= 0 && (xPosition + elementWidth) <= windowWidth) {
+          this.leftPosition = xPosition;
+        } else if (xPosition < 0) {
           this.leftPosition = 0;
-        } else if ((newXPos + elementWidth) > windowWidth) {
+        } else if ((xPosition + elementWidth) > windowWidth) {
           this.leftPosition = windowWidth - elementWidth;
         }
 
-        if (newYPos >= 0 && (newYPos + elementHeight) <= windowHeight) {
-          this.topPosition = newYPos;
-        } else if (newYPos < 0) {
+        if (yPosition >= 0 && (yPosition + elementHeight) <= windowHeight) {
+          this.topPosition = yPosition;
+        } else if (yPosition < 0) {
           this.topPosition = 0;
-        } else if ((newYPos + elementHeight) > windowHeight) {
+        } else if ((yPosition + elementHeight) > windowHeight) {
           this.topPosition = windowHeight - elementHeight;
         }
       }
