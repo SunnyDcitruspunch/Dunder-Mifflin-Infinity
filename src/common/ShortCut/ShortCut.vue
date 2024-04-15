@@ -1,9 +1,9 @@
 <template>
-  <div class="short-cut flex flex-col w-14 items-center m-2"
-    :style="{ top: topPosition + 'px', left: leftPosition + 'px', position: 'absolute', cursor: dragging ? 'move' : 'auto' }"
+  <div class="short-cut flex flex-col w-14 items-center m-2 fixed"
+    :id="`short-cut${id}`"
+    :style="{ cursor: dragging ? 'move' : 'auto' }"
        @mousedown="startDrag"
-       @mouseup="stopDrag"
-       @mouseleave="stopDrag">
+       @mouseup="stopDrag">
     <img alt="short-cut" class="w-14 z-10" :src="img" draggable="false" />
     <p class="text-xs z-10 text-white">{{ name }}</p>
   </div>
@@ -13,6 +13,7 @@
 export default {
   name: 'ShortCut',
   props: {
+    id: String,
     img: String,
     initialTop: Number,
     initialLeft: {
@@ -24,40 +25,68 @@ export default {
   data() {
     return {
       dragging: false,
+      dragElement: null,
       dragOffsetX: 0,
       dragOffsetY: 0,
-      leftPosition: this.initialLeft,
-      topPosition: this.initialTop,
-      rafId: null
+      translateX: this.initialLeft,
+      translateY: this.initialTop,
     };
+  },
+  mounted() {
+    const element = document.getElementById(`short-cut${this.id}`);
+    if (element) {
+      element.style.transform = `translate(${this.translateX}px, ${this.translateY}px)`;
+    }
+    window.addEventListener('mousemove', this.drag);
+    window.addEventListener('mouseup', this.stopDrag);
+  },
+  beforeUnmount() {
+    window.removeEventListener('mousemove', this.drag);
+    window.removeEventListener('mouseup', this.stopDrag);
   },
   methods: {
     startDrag(event) {
+      event.preventDefault();
+
       this.dragging = true;
-      this.dragOffsetX = event.clientX - this.leftPosition;
-      this.dragOffsetY = event.clientY - this.topPosition;
-      window.addEventListener('mousemove', this.drag);
-      window.addEventListener('mouseup', this.stopDrag);
-      event.preventDefault(); 
+      const originalElement = document.getElementById(`short-cut${this.id}`);
+      this.dragElement = originalElement.cloneNode(true);
+      this.dragElement.style.position = 'fixed';
+      this.dragElement.style.pointerEvents = 'none';
+      this.dragElement.style.opacity = 0.5;
+      this.dragElement.style.zIndex = 10;
+      this.dragElement.style.top = '10px';
+      this.dragElement.style.left = '10px';
+      document.body.appendChild(this.dragElement);
+      
+      const rect = originalElement.getBoundingClientRect();
+      this.dragOffsetX = event.clientX - rect.left;
+      this.dragOffsetY = event.clientY - rect.top;
+      this.updatePosition(event.clientX, event.clientY);
     },
     drag(event) {
-      event.preventDefault()
-      if (this.rafId) {
-        cancelAnimationFrame(this.rafId);
+      if (!this.dragging) return;
+      this.updatePosition(event.clientX, event.clientY);
+    },
+    updatePosition(x, y) {
+      this.translateX = x - this.dragOffsetX;
+      this.translateY = y - this.dragOffsetY;
+      if (this.dragElement) {
+        this.dragElement.style.transform = `translate(${this.translateX}px, ${this.translateY}px)`;
       }
-      this.rafId = requestAnimationFrame(() => {
-        this.leftPosition = event.clientX - this.dragOffsetX;
-        this.topPosition = event.clientY - this.dragOffsetY;
-      });
     },
     stopDrag() {
       if (this.dragging) {
         this.dragging = false;
-        window.removeEventListener('mousemove', this.drag);
-        window.removeEventListener('mouseup', this.stopDrag);
-        if (this.rafId) {
-          cancelAnimationFrame(this.rafId); 
-          this.rafId = null;
+
+        if (this.dragElement) {
+          document.body.removeChild(this.dragElement);
+          this.dragElement = null;
+        }
+
+        const originalElement = document.getElementById(`short-cut${this.id}`);
+        if (originalElement) {
+          originalElement.style.transform = `translate(${this.translateX}px, ${this.translateY}px)`;
         }
       }
     }

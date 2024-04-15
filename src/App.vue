@@ -7,6 +7,7 @@
     <ShortCut
         v-for="shortcut in shortcuts"
         :key="shortcut.name"
+        :id="shortcut.id"
         :img="shortcut.img"
         :initialLeft="shortcut.initialLeft"
         :initialTop="shortcut.initialTop"
@@ -38,8 +39,8 @@ export default {
   },
   computed: {
     isMobile() {
-      console.log('window.innerWidth ', window.innerWidth)
-      return window.innerWidth <= 768;
+      const mobileBreakpoint = 768;
+      return window.innerWidth <= mobileBreakpoint;
     }
   },
   data() {
@@ -49,11 +50,11 @@ export default {
       computer,
       folder,
       shortcuts: [
-        { img: computer, initialTop: 0, name: 'Computer' },
-        { img: folder, initialTop: shortcutSize, name: 'Meeting Notes' },
-        { img: folder, initialTop: shortcutSize*2, name: 'Archives' },
-        { img: folder, initialTop: shortcutSize*3, name: 'Cover Sheets' },
-        { img: recycle, initialLeft: window.innerWidth - shortcutSize, initialTop: window.innerHeight - shortcutSize, name: 'Recycle' }
+        { id: "1", img: computer, initialTop: 0, name: 'Computer' },
+        { id: "2", img: folder, initialTop: shortcutSize, name: 'Meeting Notes' },
+        { id: "3", img: folder, initialTop: shortcutSize*2, name: 'Archives' },
+        { id: "4", img: folder, initialTop: shortcutSize*3, name: 'Cover Sheets' },
+        { id: "5", img: recycle, initialLeft: window.innerWidth - shortcutSize, initialTop: window.innerHeight - shortcutSize, name: 'Recycle' }
       ],
       wallpaper
     }
