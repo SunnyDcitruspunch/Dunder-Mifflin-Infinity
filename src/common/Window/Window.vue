@@ -1,7 +1,7 @@
 <template>
-  <div class="window z-20 flex flex-col"
+  <div class="window z-20 flex flex-col absolute cursor-default"
     :id="id"
-    :style="{ top: topPosition + 'px', left: leftPosition + 'px', position: 'absolute', cursor: 'default' }">
+    :style="{ top: topPosition + 'px', left: leftPosition + 'px' }">
     <div class="title-bar"
        @mousedown="startDrag"
        @mouseup="stopDrag">
@@ -10,7 +10,12 @@
       </div>
       <div class="title-bar-controls">
         <button aria-label="Minimize"></button>
-        <button aria-label="Maximize"></button>
+        <div v-if="isFullScreen">
+          <button aria-label="Restore" @click="exitFullScreen"></button>
+        </div>
+        <div v-else>
+          <button aria-label="Maximize" @click="enterFullScreen"></button>
+        </div>
         <button aria-label="Close"></button>
       </div>
     </div>
@@ -19,6 +24,8 @@
 </template>
 
 <script>
+const defaultLeft = 100;
+const defaultTop = 300;
 export default {
   name: 'Window-Frame',
   props: {
@@ -32,8 +39,9 @@ export default {
       dragging: false,
       dragOffsetX: 0,
       dragOffsetY: 0,
-      leftPosition: 100,
-      topPosition: 300,
+      isFullScreen: false,
+      leftPosition: defaultLeft,
+      topPosition: defaultTop,
     };
   },
   methods: {
@@ -71,6 +79,30 @@ export default {
         } else if ((yPosition + elementHeight) > windowHeight) {
           this.topPosition = windowHeight - elementHeight;
         }
+      }
+    },
+    enterFullScreen() {
+      const window = this.$el;
+
+      if(window) {
+        window.style.top = '0'
+        window.style.left = '0'
+        window.style.width = '100vw'
+        window.style.height = '100vh'
+        this.topPosition = 0
+        this.leftPosition = 0
+        this.isFullScreen = true;
+      }
+    },
+    exitFullScreen() {
+      const window = this.$el;
+
+      if(window) {
+        window.style.width = 'auto';
+        window.style.height = 'auto';
+        this.topPosition = defaultTop;
+        this.leftPosition = defaultLeft;
+        this.isFullScreen = false;
       }
     },
     stopDrag() {
