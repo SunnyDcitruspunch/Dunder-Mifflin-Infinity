@@ -1,5 +1,5 @@
 <template>
-  <Window :height="50" :width="50" title="Infinity Interoffice QuickLaunch">
+  <Window :height="50" id="quick-launch" :width="50" title="Infinity Interoffice QuickLaunch">
     <div class="grid grid-cols-2">
       <div class="quick-search-menu">
         <p>Internet</p>

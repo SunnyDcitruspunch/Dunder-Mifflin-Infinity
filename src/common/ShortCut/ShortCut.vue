@@ -49,6 +49,14 @@ export default {
       event.preventDefault();
 
       this.dragging = true;
+      this.appendShadowElement()
+      const originalElement = document.getElementById(`short-cut${this.id}`);
+      const rect = originalElement.getBoundingClientRect();
+      this.dragOffsetX = event.clientX - rect.left;
+      this.dragOffsetY = event.clientY - rect.top;
+      this.updatePosition(event.clientX, event.clientY);
+    },
+    appendShadowElement() {
       const originalElement = document.getElementById(`short-cut${this.id}`);
       this.dragElement = originalElement.cloneNode(true);
       this.dragElement.style.position = 'fixed';
@@ -58,11 +66,6 @@ export default {
       this.dragElement.style.top = '10px';
       this.dragElement.style.left = '10px';
       document.body.appendChild(this.dragElement);
-      
-      const rect = originalElement.getBoundingClientRect();
-      this.dragOffsetX = event.clientX - rect.left;
-      this.dragOffsetY = event.clientY - rect.top;
-      this.updatePosition(event.clientX, event.clientY);
     },
     drag(event) {
       if (!this.dragging) return;
