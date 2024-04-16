@@ -16,7 +16,7 @@
         <div v-else>
           <button aria-label="Maximize" @click="enterFullScreen"></button>
         </div>
-        <button aria-label="Close"></button>
+        <button aria-label="Close" @click="closeScreen"></button>
       </div>
     </div>
     <slot></slot>
@@ -24,14 +24,14 @@
 </template>
 
 <script>
-const defaultLeft = 100;
-const defaultTop = 300;
 export default {
   name: 'Window-Frame',
   props: {
     height: Number,
     id: String,
+    left: Number,
     title: String,
+    top: Number,
     width: Number
   },
   data() {
@@ -40,8 +40,8 @@ export default {
       dragOffsetX: 0,
       dragOffsetY: 0,
       isFullScreen: false,
-      leftPosition: defaultLeft,
-      topPosition: defaultTop,
+      leftPosition: this.left,
+      topPosition: this.top,
     };
   },
   methods: {
@@ -51,6 +51,12 @@ export default {
       this.dragOffsetY = event.clientY - this.topPosition;
       window.addEventListener('mousemove', this.drag);
       window.addEventListener('mouseup', this.stopDrag);
+    },
+    closeScreen() {
+      const window = this.$el;
+      if(window) {
+        window.style.display = 'none';
+      }
     },
     drag(event) {
       if (this.dragging) {
@@ -100,8 +106,8 @@ export default {
       if(window) {
         window.style.width = 'auto';
         window.style.height = 'auto';
-        this.topPosition = defaultTop;
-        this.leftPosition = defaultLeft;
+        this.topPosition = this.top;
+        this.leftPosition = this.left;
         this.isFullScreen = false;
       }
     },
