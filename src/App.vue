@@ -45,6 +45,7 @@ export default {
   },
   data() {
     const shortcutSize = 100
+    const taskbarHeight = 32
 
     return {
       computer,
@@ -54,7 +55,7 @@ export default {
         { id: "2", img: folder, initialTop: shortcutSize, name: 'Meeting Notes' },
         { id: "3", img: folder, initialTop: shortcutSize*2, name: 'Archives' },
         { id: "4", img: folder, initialTop: shortcutSize*3, name: 'Cover Sheets' },
-        { id: "5", img: recycle, initialLeft: window.innerWidth - shortcutSize, initialTop: window.innerHeight - shortcutSize, name: 'Recycle' }
+        { id: "5", img: recycle, initialLeft: window.innerWidth - shortcutSize, initialTop: window.innerHeight - shortcutSize - taskbarHeight, name: 'Recycle' }
       ],
       wallpaper
     }
