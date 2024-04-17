@@ -10,7 +10,7 @@
           <p class="uppercase quick-search-menu">Regional branch</p>
         </div>
       </div>
-      <div class="gap-5 grid grid-cols-2 mt-6 text-left">
+      <div class="gap-7 grid grid-cols-2 mt-6 text-left">
         <div class="flex flex-col gap-3">
           <div class="quick-search-menu" @click="openNewWindow('Internet', 150, 350, 'internet')">
             <span class="flex items-center hover:cursor-pointer">
@@ -44,22 +44,22 @@
               <p>Sales</p>
             </span>
           </div>
-          <div class="quick-search-menu" @click="openNewWindow('Email', 150, 350, 'email')">
+          <div class="quick-search-menu" @click="openNewWindow('Accounting', 150, 350, 'accounting')">
             <span class="flex items-center hover:cursor-pointer">
               <img alt="item-icon" class="h-5" draggable="false" :src="icon" />
-              <p>Email</p>
+              <p>Accounting</p>
             </span>
           </div>
-          <div class="quick-search-menu" @click="openNewWindow('Instant Messenger', 150, 350, 'messenger')">
+          <div class="quick-search-menu" @click="openNewWindow('Human Resources', 150, 350, 'hr')">
             <span class="flex items-center hover:cursor-pointer">
               <img alt="item-icon" class="h-5" draggable="false" :src="icon" />
-              <p>Instant Messenger</p>
+              <p>Human Resources</p>
             </span>
           </div>
-          <div class="quick-search-menu" @click="openNewWindow('Warehouse', 150, 350, 'warehouse')">
+          <div class="quick-search-menu" @click="openNewWindow('Customer Service', 150, 350, 'customer-service')">
             <span class="flex items-center hover:cursor-pointer">
               <img alt="item-icon" class="h-5" draggable="false" :src="icon" />
-              <p>Warehouse</p>
+              <p>Customer Service</p>
             </span>
           </div>
         </div>
