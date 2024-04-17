@@ -4,7 +4,7 @@
 
 ## This is Dunder Mifflin Infinity in Windows XP
 
-<img width="1536" alt="Screen Shot 2024-04-16 at 6 30 17 PM" src="https://github.com/SunnyDcitruspunch/Dunder-Mifflin-Infinity/assets/36935854/6c7d27e9-390b-4d81-a5c9-fff628708820">
+<img width="1536" alt="Screen Shot 2024-04-16 at 6 39 07 PM" src="https://github.com/SunnyDcitruspunch/Dunder-Mifflin-Infinity/assets/36935854/ba13e05c-1a48-4593-b34c-d23d48b3b317">
 
 ## Project setup
 ```
