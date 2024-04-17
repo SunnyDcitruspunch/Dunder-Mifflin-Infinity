@@ -1,5 +1,5 @@
 <template>
-  <Window :height="50" id="quick-launch" :width="50" title="Infinity Interoffice QuickLaunch">
+  <Window :top="200" :left="100" :height="50" id="quick-launch" :width="50" title="Infinity Interoffice QuickLaunch">
     <div class="p-6 bg-white mr-1 ml-1">
       <div class="flex justify-between items-center">
         <div>
@@ -11,61 +11,69 @@
         </div>
       </div>
       <div class="gap-5 grid grid-cols-2 mt-6 text-left">
-        <div class="quick-search-menu">
-          <router-link to="/in-progress">
-            <span class="flex items-center">
+        <div class="flex flex-col gap-3">
+          <div class="quick-search-menu" @click="openNewWindow('Internet', 150, 350, 'internet')">
+            <span class="flex items-center hover:cursor-pointer">
               <img alt="item-icon" class="h-5" draggable="false" :src="icon" />
               <p>Internet</p>
             </span>
-          </router-link>
-          <router-link to="/in-progress">
-            <span class="flex items-center">
+          </div>
+          <div class="quick-search-menu" @click="openNewWindow('Email', 150, 350, 'email')">
+            <span class="flex items-center hover:cursor-pointer">
               <img alt="item-icon" class="h-5" draggable="false" :src="icon" />
               <p>Email</p>
             </span>
-          </router-link>
-          <router-link to="/in-progress">
-            <span class="flex items-center">
+          </div>
+          <div class="quick-search-menu" @click="openNewWindow('Instant Messenger', 150, 350, 'messenger')">
+            <span class="flex items-center hover:cursor-pointer">
               <img alt="item-icon" class="h-5" draggable="false" :src="icon" />
               <p>Instant Messenger</p>
             </span>
-          </router-link>
-          <router-link to="/in-progress">
-            <span class="flex items-center">
+          </div>
+          <div class="quick-search-menu" @click="openNewWindow('Warehouse', 150, 350, 'warehouse')">
+            <span class="flex items-center hover:cursor-pointer">
               <img alt="item-icon" class="h-5" draggable="false" :src="icon" />
               <p>Warehouse</p>
             </span>
-          </router-link>
+          </div>
         </div>
-        <div class="quick-search-menu">
-          <router-link to="/in-progress">
-            <span class="flex items-center">
+        <div class="flex flex-col gap-3">
+          <div class="quick-search-menu" @click="openNewWindow('Sales', 150, 350, 'sales')">
+            <span class="flex items-center hover:cursor-pointer">
               <img alt="item-icon" class="h-5" draggable="false" :src="icon" />
               <p>Sales</p>
             </span>
-          </router-link>
-          <router-link to="/in-progress">
-            <span class="flex items-center">
+          </div>
+          <div class="quick-search-menu" @click="openNewWindow('Email', 150, 350, 'email')">
+            <span class="flex items-center hover:cursor-pointer">
               <img alt="item-icon" class="h-5" draggable="false" :src="icon" />
-              <p>Accounting</p>
+              <p>Email</p>
             </span>
-          </router-link>
-          <router-link to="/in-progress">
-            <span class="flex items-center">
+          </div>
+          <div class="quick-search-menu" @click="openNewWindow('Instant Messenger', 150, 350, 'messenger')">
+            <span class="flex items-center hover:cursor-pointer">
               <img alt="item-icon" class="h-5" draggable="false" :src="icon" />
-              <p>Human Resources</p>
+              <p>Instant Messenger</p>
             </span>
-          </router-link>
-          <router-link to="/in-progress">
-            <span class="flex items-center">
+          </div>
+          <div class="quick-search-menu" @click="openNewWindow('Warehouse', 150, 350, 'warehouse')">
+            <span class="flex items-center hover:cursor-pointer">
               <img alt="item-icon" class="h-5" draggable="false" :src="icon" />
-              <p>Customer Service</p>
+              <p>Warehouse</p>
             </span>
-          </router-link>
+          </div>
         </div>
       </div>
     </div>
-    <router-view></router-view>
+  </Window>
+  <Window
+    v-for="(win, index) in windows"
+    :key="index"
+    :left="win.left"
+    :top="win.top"
+    :title="win.title"
+    :id="win.id">
+    <component :is="win.contentComponent"></component>
   </Window>
 </template>
 
@@ -73,6 +81,7 @@
 import Window from '../../common/Window/Window.vue';
 import icon from '@/assets/dm-icon.png';
 import infinity from '@/assets/dm-infinity.png';
+import UnderConstruction from '../UnderConstruction/UnderConstruction.vue';
 import './style.css'
 
 export default {
@@ -83,7 +92,19 @@ export default {
   data() {
     return {
       icon,
-      infinity
+      infinity,
+      windows: []
+    }
+  },
+  methods: {
+    openNewWindow(title, top, left, id) {
+      this.windows.push({
+        title: title,
+        contentComponent: UnderConstruction,
+        top,
+        left,
+        id: `window-${id}`
+      });
     }
   }
 }
